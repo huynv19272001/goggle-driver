@@ -1,0 +1,62 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 100000MB
+      max-file-size: 100000MB
+      max-request-size: 100000MB
+  application:
+    name: training
+    bucket:
+      name: toprate-dist
+
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    properties:
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
+
+
+
+  http:
+    multipart:
+      max-file-size: 100000MB
+      max-request-size: 100000MB
+
+  cloud:
+    aws:
+      endpointUrl: https://s3.ap-southeast-1.amazonaws.com
+      credentials:
+        access-key: AKIA4WYRFHVL7J5OCPVS
+        secret-key: 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
+      region:
+        static: ap-southeast-1
+      stack:
+        auto: false
+    consul:
+      config:
+        enabled: true
+        acl-token: ${CONSUL_ACL_TOKEN}
+        prefixes: ${CONSUL_PREFIX}
+      host: ${CONSUL_URL}
+      port: 443
+      discovery:
+        acl-token: ${CONSUL_ACL_TOKEN}
+        instanceId: ${spring.application.name}:${random.value}
+
+security:
+  basic:
+    enable: false
+
+  jwt:
+    expiration: 900000
+    secret: JwtSecretKey
+    jwtExpirationMs: 3600000
+
+  server:
+    error:
+      include-message: ALWAYS
+      include-stacktrace: never
+
